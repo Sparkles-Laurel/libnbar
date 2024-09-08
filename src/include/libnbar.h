@@ -2,8 +2,7 @@
 #ifndef LIBNBAR_H
 #   define LIBNBAR_H
 
-#include <cstdint>
-#include <cstdio>
+#   include <stdio.h>
 #   include <stdint.h>
 #   include <stdalign.h>
 #   include <stddef.h>
