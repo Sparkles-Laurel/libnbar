@@ -29,10 +29,10 @@ nbar_archive_t *nbar_fopen(char *filename, char *mode) {
     // if the file lacks a proper header, bail out
     if(fread(&header, sizeof(nbar_archive_header_t), 1, result->ar_file) != sizeof(nbar_archive_header_t)) {
         perror("nbar_fopen: error while reading archive header");
-#       pragma region         
+
             free(result);
             fclose(fp);
-#       pragma endregion
+
         return NULL;
     } else if (header._magic_left != 0x0617 || header._magic_right != 0x1033) {
         // if the Page and Left magic numbers do not match, the archive
