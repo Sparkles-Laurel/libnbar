@@ -158,6 +158,10 @@ nbar_archive_t *nbar_fopen(char *filename, char *mode) {
         return NULL;
     }
 
+    // clear temp buffers
+    free(tmp_buffer_1);
+    free(tmp_buffer_2);
+
     // construct the return value
     result->ar_content_1 =  tmp_file_1;
     result->ar_content_2 =  tmp_file_2;
