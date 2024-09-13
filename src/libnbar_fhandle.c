@@ -1,5 +1,4 @@
 #include "include/libnbar.h"
-#include <complex.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -64,7 +63,7 @@ nbar_archive_t *nbar_fopen(char *filename, char *mode) {
     }
 
     // locate the archive file pointer to the first file
-    if(fseek(fp, sizeof(nbar_archive_header_t), SEEK_SET) != sizeof(nbar_archive_header_t) - 1) {
+    if(fseek(fp, sizeof(nbar_archive_header_t), SEEK_SET)) {
         perror("nbar_fopen: fseek");
         return NULL;
     }
@@ -77,13 +76,13 @@ nbar_archive_t *nbar_fopen(char *filename, char *mode) {
     }
 
     // load the first file.
-    if(fread(tmp_buffer_1, header.file_length_1, 1, fp) != header.file_length_1) {
+    if(fread(tmp_buffer_1, header.file_length_1, 1, fp) != 1) {
         perror("nbar_fopen: fread");
         return NULL;
     }
 
     // dump the first file into the temporary file
-    if(fwrite(tmp_buffer_1, header.file_length_1, 1, tmp_file_1) != header.file_length_1) {
+    if(fwrite(tmp_buffer_1, header.file_length_1, 1, tmp_file_1) != 1) {
         perror("nbar_fopen: fwrite");
         return NULL;
     }
@@ -95,13 +94,13 @@ nbar_archive_t *nbar_fopen(char *filename, char *mode) {
     }
 
     // load the second file
-    if(fread(tmp_buffer_2, header.file_length_2, 1, fp) != header.file_length_2) {
+    if(fread(tmp_buffer_2, header.file_length_2, 1, fp) != 1) {
         perror("nbar_fopen: fread");
         return NULL;
     }
 
     // dump the second file into the temporary file
-    if(fwrite(tmp_buffer_2, header.file_length_2, 1, tmp_file_2) != header.file_length_2) {
+    if(fwrite(tmp_buffer_2, header.file_length_2, 1, tmp_file_2) != 1) {
         perror("nbar_fopen: fwrite");
         return NULL;
     }
