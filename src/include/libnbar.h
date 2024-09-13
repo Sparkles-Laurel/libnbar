@@ -10,36 +10,37 @@
 
 #   include "util/test_platform.h"
 
-#   define MAGIC_NUMBER_LEFT    0x0617
-#   define MAGIC_NUMBER_RIGHT   0x1033
+#   define NBAR_MAGIC_NUMBER_LEFT    0x0617
+#   define NBAR_MAGIC_NUMBER_RIGHT   0x1033
+
+#   define NBAR_SELECT_1ST 0
+#   define NBAR_SELECT_2ND 1
 
     typedef struct __attribute__((packed)) {
         uint16_t     _magic_left; // must be equal to 0x0617
         uint8_t      file_name_length_1;
         uint8_t      file_name_length_2;
-        char8_t    *file_name_1;
-        char8_t    *file_name_2;
+        char    file_name_1[256];
+        char    file_name_2[256];
         uint64_t     file_length_1;
         uint64_t     file_length_2;
         uint16_t     _magic_right; // must be equal to 0x1033
     } nbar_archive_header_t;
 
 #   define NBAR_ARCHIVE_HEADER_SIZE(ar) \
-        (sizeof(nbar_archive_header_t) - (2 * sizeof(char8_t)) + (ar).file_name_length_1 + (ar).file_name_length_2 ) 
+        (sizeof(nbar_archive_header_t) - (2 * sizeof(char)) + (ar).file_name_length_1 + (ar).file_name_length_2 ) 
 
     typedef struct {
         nbar_archive_header_t   header;
-        uint8_t                *file_block_1;
-        uint8_t                *file_block_2;
-        uint64_t                offset_block_1;
-        uint64_t                offset_block_2;
+        FILE                   *ar_content_1;
+        FILE                   *ar_content_2;
         FILE                   *ar_file;
     } nbar_archive_t;
 
-    nbar_archive_t *nbar_fopen (char *filename);
+    nbar_archive_t *nbar_fopen (char *filename, char *mode);
     void            nbar_fclose(nbar_archive_t *handle);
-    size_t          nbar_fread (void *buf, size_t block_size, size_t block_count, nbar_archive_t *handle, uint8_t nth_file);
-    size_t          nbar_fwrite(void *buf, size_t block_size, size_t block_count, nbar_archive_t *handle, uint8_t nth_file);
-    uint64_t        nbar_ftell (nbar_archive_t *handle, uint8_t nth_file);
+    // size_t          nbar_fread (void *buf, size_t block_size, size_t block_count, nbar_archive_t *handle, uint8_t nth_file);
+    // size_t          nbar_fwrite(void *buf, size_t block_size, size_t block_count, nbar_archive_t *handle, uint8_t nth_file);
+    // uint64_t        nbar_ftell (nbar_archive_t *handle, uint8_t nth_file);
     FILE           *nbar_fopen_nth(nbar_archive_t *handle, uint8_t nth_file);
 #endif
