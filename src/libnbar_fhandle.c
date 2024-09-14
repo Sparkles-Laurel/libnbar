@@ -8,9 +8,11 @@
 #include <unistd.h>
 
 nbar_archive_t *nbar_fopen(char *filename, char *mode) {
+    // prepare the return value
     nbar_archive_t *result = calloc(sizeof(nbar_archive_t), 1);
     nbar_archive_header_t header;
     if (result == NULL) {
+        // not enough memory or something?
         perror("nbar_fopen");
         return NULL;
     }
@@ -123,7 +125,7 @@ nbar_archive_t *nbar_fopen(char *filename, char *mode) {
 
     // checksum the first file
     crypto_hash_sha512(checksum1, tmp_buffer_1, header.file_length_1);
-    if(!memcmp(checksum1, header.file_checksum_1, crypto_hash_sha512_BYTES)) {
+    if(memcmp(checksum1, header.file_checksum_1, crypto_hash_sha512_BYTES)) {
         errno = EILSEQ;
         perror("nbar_fopen: file checksum");
         free(tmp_buffer_1);
