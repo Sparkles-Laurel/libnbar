@@ -1,1 +1,2 @@
-doc/man/**  linguist-detectable
+doc/man/*  linguist-detectable
+doc/man/*  linguist-language=roff
