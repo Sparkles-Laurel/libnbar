@@ -1,0 +1,6 @@
+[
+{
+  "directory": "/home/sparky/proj/rainbow-linux/libnbar",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fPIC", "-o", "build/.objs/nbar/linux/x86_64/release/src/libnbar_fhandle.c.o", "src/libnbar_fhandle.c"],
+  "file": "src/libnbar_fhandle.c"
+}]
