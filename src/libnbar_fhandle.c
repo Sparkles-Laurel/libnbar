@@ -74,11 +74,14 @@ nbar_archive_t *nbar_fopen(char *filename, char *mode) {
     }
 
     // create two temporary files
-    FILE *tmp_file_1 = tmpfile(), *tmp_file_2 = tmpfile();
+    FILE *tmp_file_1;
+    FILE *tmp_file_2;
 
+    tmp_file_1 = fmemopen(NULL, header.file_length_1, "r+");
+    tmp_file_2 = fmemopen(NULL, header.file_length_2, "r+");
     // bail out if any of the files fail to create
     if(tmp_file_1 == NULL || tmp_file_2 == NULL) {
-        perror("nbar_fopen: tmpfile");
+        perror("nbar_fopen: fmemopen");
         fclose(fp);
         free(result);
         return NULL;
