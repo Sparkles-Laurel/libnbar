@@ -39,8 +39,4 @@
 
     nbar_archive_t *nbar_fopen (char *filename, char *mode);
     void            nbar_fclose(nbar_archive_t *handle);
-    // size_t          nbar_fread (void *buf, size_t block_size, size_t block_count, nbar_archive_t *handle, uint8_t nth_file);
-    // size_t          nbar_fwrite(void *buf, size_t block_size, size_t block_count, nbar_archive_t *handle, uint8_t nth_file);
-    // uint64_t        nbar_ftell (nbar_archive_t *handle, uint8_t nth_file);
-    FILE           *nbar_fopen_nth(nbar_archive_t *handle, uint8_t nth_file);
 #endif
