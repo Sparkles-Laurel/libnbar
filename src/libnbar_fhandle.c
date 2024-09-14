@@ -6,7 +6,6 @@
 #include <errno.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <sodium/crypto_hash_sha512.h>
 
 nbar_archive_t *nbar_fopen(char *filename, char *mode) {
     nbar_archive_t *result = calloc(sizeof(nbar_archive_t), 1);
