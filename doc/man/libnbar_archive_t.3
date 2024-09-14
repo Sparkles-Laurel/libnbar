@@ -1,0 +1,36 @@
+.TH NBAR_ARCHIVE_T 3 "September 2024" "libnbar Library" "Library Structures Manual"
+.SH NAME
+.B nbar_archive_t
+\- Structure representing an NBAR archive.
+
+.SH SYNOPSIS
+#include "libnbar.h"
+
+.SH DESCRIPTION
+The \fBnbar_archive_t\fP structure represents an open NBAR archive, including its header and file content pointers. It is used internally by the \fBlibnbar\fP library to manage the files within an NBAR archive.
+
+The structure contains the following members:
+.TP
+.B header
+A \fBnbar_archive_header_t\fP structure that holds the metadata and file information for the NBAR archive.
+.TP
+.B ar_content_1
+A pointer to a \fBFILE\fP object that represents the first file in the archive, stored in temporary memory.
+.TP
+.B ar_content_2
+A pointer to a \fBFILE\fP object that represents the second file in the archive, stored in temporary memory.
+.TP
+.B ar_file
+A pointer to a \fBFILE\fP object representing the main archive file.
+
+.SH USAGE
+This structure is typically used with the \fBnbar_fopen(3)\fP and \fBnbar_fclose(3)\fP functions. Users should not directly manipulate the members of this structure but should use the provided functions to interact with NBAR archives.
+
+.SH SEE ALSO
+.B nbar_fopen(3), nbar_fclose(3), nbar_archive_header_t(3)
+
+.SH AUTHOR
+Written by [Sparkles-Sericea] for the [Rainbow Linux] project.
+
+.SH REPORTING BUGS
+Report bugs to [https://github.com/rainbow-linux/libnbar/issues].

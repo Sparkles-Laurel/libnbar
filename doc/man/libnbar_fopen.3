@@ -1,0 +1,80 @@
+.TH NBAR_FOPEN 3 "September 2024" "libnbar Library" "Library Functions Manual"
+.SH NAME
+.B nbar_fopen
+\- Open an NBAR archive file.
+
+.SH SYNOPSIS
+.nf
+#include "libnbar.h"
+.B nbar_archive_t *
+.B nbar_fopen(char *filename, char *mode);
+.fi
+
+.SH DESCRIPTION
+.B nbar_fopen
+opens an NBAR archive file, validates its header, and loads the files contained in the archive into temporary memory.
+
+The function performs several tasks:
+- Opens the specified archive file with the given mode.
+- Reads and verifies the archive's header, including magic numbers and file checksums.
+- Creates temporary memory files for the two files contained in the archive.
+- Checks the integrity of the files using SHA-512 checksums.
+
+The function is typically used in conjunction with \fBnbar_fclose(3)\fP to manage the lifecycle of the archive.
+
+.SH PARAMETERS
+.TP
+.B \fIfilename\fP
+Path to the NBAR archive file to be opened.
+.TP
+.B \fImode\fP
+File mode for opening the archive (e.g., "r" for read).
+
+.SH RETURN VALUE
+Returns a pointer to an \fBnbar_archive_t\fP structure on success, or \fBNULL\fP if the file could not be opened or validated.
+
+.SH ERRORS
+Sets \fBerrno\fP on failure, including:
+.TP
+.B EILSEQ
+Invalid magic numbers or checksum mismatches.
+.TP
+.B ENOMEM
+Memory allocation failure.
+.TP
+.B EINVAL
+Invalid mode or parameters.
+
+.SH EXAMPLE
+.nf
+#include "libnbar.h"
+#include <stdio.h>
+#include <sodium.h>
+
+int main() {
+    if (sodium_init() < 0) {
+        fprintf(stderr, "Failed to initialize libsodium\n");
+        return 1;
+    }
+
+    nbar_archive_t *archive = nbar_fopen("archive.nbar", "r");
+    if (!archive) {
+        perror("Failed to open archive");
+        return 1;
+    }
+
+    // Use the archive...
+
+    nbar_fclose(archive);
+    return 0;
+}
+.fi
+
+.SH SEE ALSO
+.B nbar_fclose(3), sodium_init(3), crypto_hash_sha512(3), iris(8)
+
+.SH AUTHOR
+Written by [Sparkles-Sericea] for the [Rainbow Linux] project.
+
+.SH REPORTING BUGS
+Report bugs to [https://github.com/rainbow-linux/libnbar/issues].

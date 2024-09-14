@@ -1,0 +1,55 @@
+.TH NBAR_FCLOSE 3 "September 2024" "libnbar Library" "Library Functions Manual"
+.SH NAME
+.B nbar_fclose
+\- Close an NBAR archive file.
+
+.SH SYNOPSIS
+.nf
+#include "libnbar.h"
+.B void
+.B nbar_fclose(nbar_archive_t *handle);
+.fi
+
+.SH DESCRIPTION
+.B nbar_fclose
+closes an open NBAR archive file and releases all associated resources.
+
+The function ensures that all temporary memory files created for the archive's contents are properly closed and the main archive file is also closed. After calling this function, the \fBnbar_archive_t\fP structure should no longer be used.
+
+.SH PARAMETERS
+.TP
+.B \fIhandle\fP
+A pointer to an \fBnbar_archive_t\fP structure representing an open NBAR archive.
+
+.SH RETURN VALUE
+This function does not return a value.
+
+.SH EXAMPLE
+.nf
+#include "libnbar.h"
+#include <stdio.h>
+
+int main() {
+    // Open the archive
+    nbar_archive_t *archive = nbar_fopen("archive.nbar", "r");
+    if (!archive) {
+        perror("Failed to open archive");
+        return 1;
+    }
+
+    // Process the archive...
+
+    // Close the archive
+    nbar_fclose(archive);
+    return 0;
+}
+.fi
+
+.SH SEE ALSO
+.B nbar_fopen(3), iris(8)
+
+.SH AUTHOR
+Written by [Sparkles-Sericea] for the [Rainbow Linux] project.
+
+.SH REPORTING BUGS
+Report bugs to [https://github.com/rainbow-linux/libnbar/issues].

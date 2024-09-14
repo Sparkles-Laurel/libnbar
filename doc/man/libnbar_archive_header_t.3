@@ -1,0 +1,54 @@
+.TH NBAR_ARCHIVE_HEADER_T 3 "September 2024" "libnbar Library" "Library Structures Manual"
+.SH NAME
+.B nbar_archive_header_t
+\- Structure representing the header of an NBAR archive.
+
+.SH SYNOPSIS
+#include "libnbar.h"
+
+.SH DESCRIPTION
+The \fBnbar_archive_header_t\fP structure holds metadata about the contents of an NBAR archive. This header is used to validate and interpret the files within the archive.
+
+The structure contains the following members:
+.TP
+.B _magic_left
+A \fBuint16_t\fP that must be equal to \fB0x0617\fP. This serves as a magic number to identify the start of the archive header.
+.TP
+.B file_name_length_1
+A \fBuint8_t\fP representing the length of the first file name.
+.TP
+.B file_name_length_2
+A \fBuint8_t\fP representing the length of the second file name.
+.TP
+.B file_name_1
+A \fBchar\fP array of size 256 that stores the name of the first file in the archive.
+.TP
+.B file_name_2
+A \fBchar\fP array of size 256 that stores the name of the second file in the archive.
+.TP
+.B file_checksum_1
+A \fBchar\fP array of size \fBcrypto_hash_sha512_BYTES\fP that holds the SHA-512 checksum of the first file.
+.TP
+.B file_checksum_2
+A \fBchar\fP array of size \fBcrypto_hash_sha512_BYTES\fP that holds the SHA-512 checksum of the second file.
+.TP
+.B file_length_1
+A \fBuint64_t\fP indicating the length of the first file in bytes.
+.TP
+.B file_length_2
+A \fBuint64_t\fP indicating the length of the second file in bytes.
+.TP
+.B _magic_right
+A \fBuint16_t\fP that must be equal to \fB0x1033\fP. This serves as a magic number to identify the end of the archive header.
+
+.SH USAGE
+This structure is used internally by the \fBlibnbar\fP library functions to handle and validate the metadata of NBAR archives. Users generally do not interact with this structure directly.
+
+.SH SEE ALSO
+.B nbar_fopen(3), nbar_fclose(3), nbar_archive_t(3)
+
+.SH AUTHOR
+Written by [Sparkles-Sericea] for the [Rainbow Linux] project.
+
+.SH REPORTING BUGS
+Report bugs to [https://github.com/rainbow-linux/libnbar/issues].

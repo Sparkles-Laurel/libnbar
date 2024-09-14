@@ -1,0 +1,45 @@
+.TH LIBNBAR 3 "September 2024" "libnbar Library" "Library Functions Manual"
+.SH NAME
+.B libnbar
+\- A library for manipulating Non-Binary Archive (NBAR) files.
+
+.SH SYNOPSIS
+.nf
+#include "libnbar.h"
+.B nbar_archive_t *
+.B nbar_fopen(char *filename, char *mode);
+.B void
+.B nbar_fclose(nbar_archive_t *handle);
+.fi
+
+.SH DESCRIPTION
+The \fBlibnbar\fP library provides functions to work with the Non-Binary Archive (NBAR) format. The NBAR format is designed to hold a pair of related files together in a single archive. This is particularly useful for applications that require file pairs to function correctly.
+
+The NBAR format addresses the common issue of distributing file pairs separately, which complicates their use. It aims to simplify this by packaging related files together.
+
+The library is primarily used in the context of the \fBiris package manager\fP (\fBiris(8)\fP), but it can be applied in other scenarios requiring paired files. Examples of paired files include:
+.TP
+.B zstd-compressed files and compression dictionaries
+.TP
+.B Checksum files and GPG keys
+.TP
+.B Large block files and their checksums
+.TP
+.B Software packages and their signature files
+
+.SH FUNCTIONS
+.TP
+.B nbar_fopen
+Opens an NBAR archive file, validates its contents, and loads the files into temporary memory. See \fBnbar_fopen(3)\fP for detailed usage.
+.TP
+.B nbar_fclose
+Closes an open NBAR archive, releasing all associated resources. See \fBnbar_fclose(3)\fP for detailed usage.
+
+.SH SEE ALSO
+.B nbar_fopen(3), nbar_fclose(3), sodium_init(3), crypto_hash_sha512(3), iris(8)
+
+.SH AUTHOR
+Written by [Sparkles-Sericea] for the [Rainbow Linux] project.
+
+.SH REPORTING BUGS
+Report bugs to [https://github.com/rainbow-linux/libnbar/issues].
