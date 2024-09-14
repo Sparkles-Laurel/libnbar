@@ -202,3 +202,13 @@ nbar_archive_t *nbar_fopen(char *filename, char *mode) {
 
     return result;
 }
+
+void nbar_fclose(nbar_archive_t *handle) {
+    if (handle == NULL) return;
+    
+    if (handle->ar_content_1) fclose(handle->ar_content_1);
+    if (handle->ar_content_2) fclose(handle->ar_content_2);
+    if (handle->ar_file) fclose(handle->ar_file);
+    
+    free(handle);
+}
