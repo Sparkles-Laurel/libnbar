@@ -39,7 +39,7 @@
         FILE                   *ar_content_2;
         FILE                   *ar_file;
     } nbar_archive_t;
-
+    
     nbar_archive_t *nbar_fopen (char *filename, char *mode);
     void            nbar_fclose(nbar_archive_t *handle);
 #endif
