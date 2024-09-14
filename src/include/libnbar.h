@@ -2,12 +2,13 @@
 #ifndef LIBNBAR_H
 #   define LIBNBAR_H
 
+#include <sodium/crypto_hash_sha512.h>
 #   include <stdio.h>
 #   include <stdint.h>
 #   include <stdalign.h>
 #   include <stddef.h>
 #   include <uchar.h>
-
+#   include <sodium.h>
 #   include "util/test_platform.h"
 
 #   define NBAR_MAGIC_NUMBER_LEFT    0x0617
@@ -20,8 +21,10 @@
         uint16_t     _magic_left; // must be equal to 0x0617
         uint8_t      file_name_length_1;
         uint8_t      file_name_length_2;
-        char    file_name_1[256];
-        char    file_name_2[256];
+        char         file_name_1[256];
+        char         file_name_2[256];
+        char         file_checksum_1[crypto_hash_sha512_BYTES];
+        char         file_checksum_2[crypto_hash_sha512_BYTES];
         uint64_t     file_length_1;
         uint64_t     file_length_2;
         uint16_t     _magic_right; // must be equal to 0x1033
