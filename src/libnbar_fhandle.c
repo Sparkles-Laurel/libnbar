@@ -1,12 +1,5 @@
 #include "include/libnbar.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/stat.h>
-#include <unistd.h>
-
 nbar_archive_t *nbar_fopen(char *filename, char *mode) {
     // prepare the return value
     nbar_archive_t *result = calloc(sizeof(nbar_archive_t), 1);

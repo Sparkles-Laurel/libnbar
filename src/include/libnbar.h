@@ -2,12 +2,15 @@
 #ifndef LIBNBAR_H
 #   define LIBNBAR_H
 
-#   include <sodium/crypto_hash_sha512.h>
 #   include <stdio.h>
 #   include <stdint.h>
 #   include <stdalign.h>
 #   include <stddef.h>
 #   include <uchar.h>
+#   include <string.h>
+#   include <errno.h>
+#   include <unistd.h>
+#   include <sys/stat.h>
 #   include <sodium.h>
 #   include "util/test_platform.h"
 
