@@ -2,7 +2,7 @@
 #ifndef LIBNBAR_H
 #   define LIBNBAR_H
 
-#include <sodium/crypto_hash_sha512.h>
+#   include <sodium/crypto_hash_sha512.h>
 #   include <stdio.h>
 #   include <stdint.h>
 #   include <stdalign.h>
@@ -39,7 +39,7 @@
         FILE                   *ar_content_2;
         FILE                   *ar_file;
     } nbar_archive_t;
-    
+
     nbar_archive_t *nbar_fopen (char *filename, char *mode);
     void            nbar_fclose(nbar_archive_t *handle);
 #endif
